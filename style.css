@@ -5,7 +5,48 @@
 }
 
 body{
-    background:#0f0f0f;
+    font-family:Arial,sans-serif;
+    background:linear-gradient(135deg,#050510,#140028,#25003f);
     color:white;
-    font-family:Arial, sans-serif;
+    height:100vh;
+    overflow:hidden;
+}
+
+.hero{
+    display:flex;
+    flex-direction:column;
+    justify-content:center;
+    align-items:center;
+    text-align:center;
+    height:100vh;
+    padding:20px;
+}
+
+h1{
+    font-size:3rem;
+    color:#ff8ac6;
+    text-shadow:0 0 20px #ff4da6;
+    margin-bottom:20px;
+}
+
+p{
+    font-size:1.2rem;
+    color:#f5d6e8;
+    margin-bottom:30px;
+}
+
+button{
+    padding:15px 35px;
+    font-size:20px;
+    border:none;
+    border-radius:50px;
+    cursor:pointer;
+    background:#ff4da6;
+    color:white;
+    transition:0.3s;
+}
+
+button:hover{
+    transform:scale(1.08);
+    box-shadow:0 0 25px #ff4da6;
 }

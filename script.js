@@ -1,5 +1,16 @@
 const btn = document.getElementById("startBtn");
 
+const photos = [
+  "photo1.jpg",
+  "photo2.jpg",
+  "photo3.jpg",
+  "photo5.jpg",
+  "photo6.jpg",
+  "photo7.jpg"
+];
+
+let current = 0;
+
 btn.addEventListener("click", () => {
 
 document.body.innerHTML = `
@@ -44,7 +55,7 @@ promiseBtn.addEventListener("click", memories);
 
 });
 
-function memories(){
+function memories() {
 
 document.body.innerHTML = `
 
@@ -53,7 +64,7 @@ document.body.innerHTML = `
 <h1>Our Memories 🥹❣️</h1>
 
 <img id="slide"
-src="20260223_180501.jpg"
+src="${photos[0]}"
 style="
 width:300px;
 height:400px;
@@ -61,16 +72,33 @@ object-fit:cover;
 border-radius:20px;
 box-shadow:0 0 30px #ff4da6;
 margin-top:20px;
+transition:opacity .8s ease;
 ">
 
 <p style="margin-top:25px;font-size:20px;">
 Every photo with you...🫂❣️
-<br><br>
-is my favourite memory...🥹
 </p>
 
 </div>
 
 `;
+
+const slide = document.getElementById("slide");
+
+setInterval(() => {
+
+current = (current + 1) % photos.length;
+
+slide.style.opacity = "0";
+
+setTimeout(() => {
+
+slide.src = photos[current];
+
+slide.style.opacity = "1";
+
+}, 500);
+
+}, 3000);
 
 }

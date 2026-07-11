@@ -6,8 +6,8 @@
 
 body{
     font-family:Arial,Helvetica,sans-serif;
-    background:linear-gradient(180deg,#050816,#0b1026,#140b2f);
-    color:white;
+    background:linear-gradient(180deg,#050816,#0b1026,#17082d);
+    color:#fff;
     overflow:hidden;
     min-height:100vh;
 }
@@ -15,24 +15,24 @@ body{
 #stars{
     position:fixed;
     inset:0;
+    z-index:-3;
     background-image:
-      radial-gradient(2px 2px at 20px 30px,#fff,transparent),
-      radial-gradient(2px 2px at 120px 150px,#fff,transparent),
-      radial-gradient(2px 2px at 250px 80px,#fff,transparent),
-      radial-gradient(2px 2px at 420px 220px,#fff,transparent),
-      radial-gradient(2px 2px at 600px 120px,#fff,transparent),
-      radial-gradient(2px 2px at 800px 300px,#fff,transparent);
-    background-size:900px 500px;
-    animation:starsMove 25s linear infinite;
-    z-index:-2;
+    radial-gradient(2px 2px at 20px 30px,#fff,transparent),
+    radial-gradient(2px 2px at 120px 200px,#fff,transparent),
+    radial-gradient(2px 2px at 250px 80px,#fff,transparent),
+    radial-gradient(2px 2px at 450px 180px,#fff,transparent),
+    radial-gradient(2px 2px at 650px 100px,#fff,transparent),
+    radial-gradient(2px 2px at 900px 250px,#fff,transparent);
+    background-size:1000px 600px;
+    animation:stars 25s linear infinite;
 }
 
-@keyframes starsMove{
+@keyframes stars{
     from{
         transform:translateY(0);
     }
     to{
-        transform:translateY(500px);
+        transform:translateY(600px);
     }
 }
 
@@ -40,27 +40,27 @@ body{
     width:100%;
     min-height:100vh;
     display:flex;
+    flex-direction:column;
     justify-content:center;
     align-items:center;
-    flex-direction:column;
     text-align:center;
     padding:20px;
 }
 
 h1{
-    font-size:2.5rem;
-    margin-bottom:20px;
+    font-size:3rem;
     text-shadow:0 0 20px #ff4da6;
 }
 
 p{
-    font-size:20px;
+    margin-top:20px;
+    font-size:22px;
     line-height:1.8;
 }
 
 button{
-    margin-top:30px;
-    padding:15px 35px;
+    margin-top:40px;
+    padding:15px 40px;
     border:none;
     border-radius:50px;
     background:#ff4da6;
@@ -76,20 +76,22 @@ button:hover{
 }
 
 #slide{
-    width:300px;
-    height:400px;
+    width:320px;
+    height:420px;
+    margin-top:25px;
     object-fit:cover;
     border-radius:20px;
-    margin-top:20px;
-    box-shadow:0 0 30px #ff4da6;
+    border:4px solid white;
+    box-shadow:0 0 35px #ff4da6;
+    transition:opacity .8s ease;
     animation:zoom 3s linear infinite;
 }
 
 @keyframes zoom{
-    0%{
+    from{
         transform:scale(1);
     }
-    100%{
+    to{
         transform:scale(1.08);
     }
 }
@@ -98,8 +100,8 @@ button:hover{
     position:fixed;
     bottom:-50px;
     color:#ff4da6;
-    font-size:25px;
     animation:float 8s linear infinite;
+    font-size:25px;
     pointer-events:none;
 }
 
@@ -108,9 +110,57 @@ button:hover{
         transform:translateY(0);
         opacity:1;
     }
-
     to{
         transform:translateY(-120vh);
         opacity:0;
     }
+}
+
+#cake{
+    font-size:120px;
+    animation:bounce 1.2s infinite;
+}
+
+@keyframes bounce{
+    0%,100%{
+        transform:translateY(0);
+    }
+    50%{
+        transform:translateY(-20px);
+    }
+}
+
+.final{
+    animation:fade 2s;
+}
+
+@keyframes fade{
+    from{
+        opacity:0;
+    }
+    to{
+        opacity:1;
+    }
+}
+
+@media(max-width:768px){
+
+h1{
+font-size:2.2rem;
+}
+
+p{
+font-size:18px;
+}
+
+#slide{
+width:260px;
+height:340px;
+}
+
+button{
+font-size:18px;
+padding:14px 32px;
+}
+
 }

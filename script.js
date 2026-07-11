@@ -1,4 +1,7 @@
-const btn = document.getElementById("startBtn");
+const startBtn = document.getElementById("startBtn");
+const home = document.getElementById("home");
+const hearts = document.getElementById("hearts");
+const confetti = document.getElementById("confetti");
 
 const photos = [
   "photo1.jpg",
@@ -9,96 +12,135 @@ const photos = [
   "photo7.jpg"
 ];
 
-let current = 0;
+// Floating Hearts
+function createHeart() {
+  const heart = document.createElement("div");
+  heart.className = "heart";
+  heart.innerHTML = ["❤️","💖","💕","💗","💞"][Math.floor(Math.random()*5)];
+  heart.style.left = Math.random() * 100 + "vw";
+  heart.style.fontSize = (18 + Math.random() * 28) + "px";
+  heart.style.animationDuration = (5 + Math.random() * 5) + "s";
+  hearts.appendChild(heart);
 
-btn.addEventListener("click", () => {
+  setTimeout(() => {
+    heart.remove();
+  }, 10000);
+}
 
-document.body.innerHTML = `
+setInterval(createHeart, 300);
 
-<div class="container">
-
-<h1 style="font-size:2.8rem;">
-Hi Gayuu Babyyy...🥹❣️
-</h1>
-
-<p style="margin-top:20px;font-size:20px;line-height:1.8;">
-Indha surprise...
-<br><br>
-Unakkaaga mattum dhaan...🫂💖
-<br><br>
-Skip pannama
-Last varaikkum paakkanum...🤞🏻
-</p>
-
-<br>
-
-<button id="promiseBtn">
-Promise 🤞🏻
-</button>
-
-</div>
-
-`;
-
-const promiseBtn = document.getElementById("promiseBtn");
-
-promiseBtn.style.padding = "15px 35px";
-promiseBtn.style.border = "none";
-promiseBtn.style.borderRadius = "50px";
-promiseBtn.style.background = "#ff4da6";
-promiseBtn.style.color = "white";
-promiseBtn.style.fontSize = "20px";
-promiseBtn.style.cursor = "pointer";
-promiseBtn.style.boxShadow = "0 0 20px #ff4da6";
-
-promiseBtn.addEventListener("click", memories);
-
+// Start
+startBtn.addEventListener("click", () => {
+  startBtn.disabled = true;
+  showSlideshow();
 });
 
-function memories() {
+// Slideshow
+function showSlideshow() {
 
-document.body.innerHTML = `
+  home.innerHTML = `
+    <h1>Happy Birthday My Love ❤️</h1>
+    <img id="slide" src="${photos[0]}">
+  `;
 
-<div class="container">
+  const slide = document.getElementById("slide");
 
-<h1>Our Memories 🥹❣️</h1>
+  let i = 0;
 
-<img id="slide"
-src="${photos[0]}"
-style="
-width:300px;
-height:400px;
-object-fit:cover;
-border-radius:20px;
-box-shadow:0 0 30px #ff4da6;
-margin-top:20px;
-transition:opacity .8s ease;
-">
+  const interval = setInterval(() => {
 
-<p style="margin-top:25px;font-size:20px;">
-Every photo with you...🫂❣️
-</p>
+    slide.style.opacity = 0;
 
-</div>
+    setTimeout(() => {
+      i++;
 
-`;
+      if (i >= photos.length) {
+        clearInterval(interval);
+        showCake();
+        return;
+      }
 
-const slide = document.getElementById("slide");
+      slide.src = photos[i];
+      slide.style.opacity = 1;
 
-setInterval(() => {
+    }, 700);
 
-current = (current + 1) % photos.length;
+  }, 3500);
 
-slide.style.opacity = "0";
+}
 
-setTimeout(() => {
+// Cake
+function showCake() {
 
-slide.src = photos[current];
+  home.innerHTML = `
+    <div id="cake">🎂</div>
+    <h1 style="margin-top:25px;">Make a Wish... ✨</h1>
+  `;
 
-slide.style.opacity = "1";
+  setTimeout(() => {
+    blastConfetti();
+    showFinal();
+  }, 5000);
 
-}, 500);
+}
 
-}, 3000);
+// Confetti
+function blastConfetti() {
+
+  for (let i = 0; i < 250; i++) {
+
+    const piece = document.createElement("div");
+
+    piece.style.position = "fixed";
+    piece.style.left = Math.random() * 100 + "vw";
+    piece.style.top = "-20px";
+    piece.style.width = "8px";
+    piece.style.height = "14px";
+    piece.style.background = `hsl(${Math.random()*360},100%,60%)`;
+    piece.style.opacity = "1";
+    piece.style.borderRadius = "2px";
+    piece.style.pointerEvents = "none";
+    piece.style.zIndex = "999";
+
+    const duration = 3000 + Math.random() * 3000;
+
+    piece.animate([
+      {
+        transform: `translateY(0px) rotate(0deg)`
+      },
+      {
+        transform: `translateY(${window.innerHeight+100}px) rotate(${Math.random()*1080}deg)`
+      }
+    ],{
+      duration: duration,
+      easing: "linear"
+    });
+
+    confetti.appendChild(piece);
+
+    setTimeout(() => {
+      piece.remove();
+    }, duration);
+
+  }
+
+}
+
+// Final Message
+function showFinal() {
+
+  home.innerHTML = `
+    <div class="final">
+      <h1>Happy Birthday My Queen 👸🏻❤️</h1>
+
+      <p style="margin-top:30px;font-size:28px;">
+        I Love You Forever 🫂❤️
+      </p>
+
+      <p style="margin-top:40px;font-size:24px;color:#ffd6f0;">
+        — உன்னவன் Vasanth ❣️
+      </p>
+    </div>
+  `;
 
 }
